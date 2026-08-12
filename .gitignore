@@ -1,6 +1,7 @@
-# vsc
+# vscode
 .bin
 .vsc
 
 # java
 .class
+/bin
