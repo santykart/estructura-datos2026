@@ -1,6 +1,5 @@
 package main.java.tareas;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BubbleSort {
@@ -11,13 +10,14 @@ public class BubbleSort {
     ========================================= */
     public static void main(String[] args){
         // Declarar variables
-        int[] vendedores = new int[10];
         int[] ventas = new int[10];
-        double promedio;
+        int[] ordenBurbuja = new int[ventas.length];
 
         IO.println("<< Ordenamiento Burbuja (Bubble Sort) >>");
         ventas = capturarVentas(ventas); // Solicitar datos al usuario
         mostrarArreglo(ventas); // Mostrar los datos que fueron ingresados por el usuario
+        ordenBurbuja = ordenarBurbuja(ventas); // Realizar el ordenado de los datos de menor a mayor
+        promedio(ventas); // Mostrar el promedio de ventas
     }
     
     /* =========================================
@@ -52,8 +52,22 @@ public class BubbleSort {
     }
 
     // Método 3. Ordenar Burbuja >> permite al usuario reordenar los valores de menor a mayor
+    public static int[] ordenarBurbuja(int[] ventas){
+        
+    }
 
     // Método 4. Calcular Promedio >> muestra al usuario el promedio de las ventas realizadas
+    public static void promedio(int[] ventas){
+        int suma = 0;
+        double promedio = 0;
+        for(int i=0; i<ventas.length; i++){
+            suma += ventas[i];
+        }
+
+        // Calcular y mostrar el resultado
+        promedio = suma/ventas.length;
+        IO.println("El promedio de ventas de los 10 trabajadores fue de " + promedio);
+    }
 
     // Método 5. Comprobar Datos >> permite verificar que las ventas realizadas sean únicamente cantidades enteras (int)
     public static int comprobarDatos(int cantidad, int i){
