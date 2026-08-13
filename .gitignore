@@ -1,7 +1,13 @@
 # vscode
 .bin
+bin/
 .vsc
+.vscode/
 
 # java
 .class
 /bin
+
+# maven
+target/
+.mvn/
