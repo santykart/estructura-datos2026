@@ -1,4 +1,4 @@
-package main.java.tareas;
+package tareas;
 
 import java.util.Scanner;
 

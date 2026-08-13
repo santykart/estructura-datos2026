@@ -1,4 +1,4 @@
-package main.java;
+package actividadesclase;
 
 public class Nodo {
     // ATRIBUTOS
