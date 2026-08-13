@@ -12,14 +12,14 @@ public class BubbleSort {
         // Declarar variables
         int cantidad = 10;
         int[] ventas = new int[cantidad];
-        int[] ordenBurbuja = new int[cantidad];
 
-        IO.println("<< Ordenamiento Burbuja (Bubble Sort) >>");
+        IO.println("\n<< Ordenamiento Burbuja (Bubble Sort) >>");
         ventas = capturarVentas(ventas, cantidad); // 1. Solicitar datos al usuario
 
+        IO.println("\n<< VALORES INGRESADOS >>");
         mostrarArreglo(ventas); // 2. Mostrar los datos que fueron ingresados por el usuario
 
-        ventas = ordenarBurbuja(ventas, cantidad); // 3. Realizar el ordenado de los datos de menor a mayor
+        ordenarBurbuja(ventas, cantidad); // 3. Realizar el ordenado de los datos de menor a mayor
         mostrarArreglo(ventas);
 
         promedio(ventas); // 4. Mostrar el promedio de ventas
@@ -50,15 +50,13 @@ public class BubbleSort {
 
     // Método 2. Mostrar arreglo >> permite al usuario visualizar los valores de venta que ingresó en el 'Método 1'
     public static void mostrarArreglo(int[] ventas){
-        IO.println("\n<< VALORES INGRESADOS >>");
         for(int i=0; i<ventas.length; i++){
             IO.println("Ventas del trabajador " + (i+1) + " = " + ventas[i]);
         }
     }
 
     // Método 3. Ordenar Burbuja >> permite al usuario reordenar los valores de menor a mayor
-    public static int[] ordenarBurbuja(int[] ventas, int cantidad){
-        ventas = new int[cantidad];
+    public static void ordenarBurbuja(int[] ventas, int cantidad){
         int temp;
 
         IO.println("\n<< ORDENAMIENTO BURBUJA >>");
@@ -71,13 +69,11 @@ public class BubbleSort {
                 }
             }
         }
-
-        return ventas;
     }
 
     // Método 4. Calcular Promedio >> muestra al usuario el promedio de las ventas realizadas
     public static void promedio(int[] ventas){
-        int suma = 0;
+        double suma = 0;
         double promedio = 0;
 
         IO.println("\n<< PROMEDIO DE VENTAS >>");
