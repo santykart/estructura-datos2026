@@ -3,96 +3,121 @@ package tareas;
 import java.util.Scanner;
 
 public class BubbleSort {
-    public static Scanner sc = new Scanner(System.in);    // Declarar 'Scanner sc' de forma global
+    public static Scanner sc = new Scanner(System.in);  //  Se declara de forma global Scanner 'sc'
 
-    /* =========================================
-    MAIN DEL PROGRAMA
-    ========================================= */
+    /* ======================================
+    - - - - MAIN DEL PROGRAMA - - - -
+    ====================================== */
     public static void main(String[] args){
-        // Declarar variables
-        int cantidad = 10;
-        int[] ventas = new int[cantidad];
+        // DECLARAR VARIABLES
+        int[] ventas;
+        int[] vendedores;
+        int numero;
 
-        IO.println("\n<< Ordenamiento Burbuja (Bubble Sort) >>");
-        ventas = capturarVentas(ventas, cantidad); // 1. Solicitar datos al usuario
-
-        IO.println("\n<< VALORES INGRESADOS >>");
-        mostrarArreglo(ventas); // 2. Mostrar los datos que fueron ingresados por el usuario
-
-        ordenarBurbuja(ventas, cantidad); // 3. Realizar el ordenado de los datos de menor a mayor
-        mostrarArreglo(ventas);
-
-        promedio(ventas); // 4. Mostrar el promedio de ventas
-    }
-    
-    /* =========================================
-    MÉTODOS DEL PROGRAMA
-    ========================================= */
-
-    // Método 1. Capturar ventas >> permite al usuario ingresar los valores de las 10 ventas realizadas
-    public static int[] capturarVentas(int[] ventas, int numero){
+        // SOLICITAR INGRESO DE DATOS AL USUARIO
+        IO.print("\nIngresa el número de ventas que deseas registrar: ");
+        numero = sc.nextInt(); sc.nextLine();
         ventas = new int[numero];
+        vendedores = new int[numero];
 
-        IO.println("\nPor favor ingresa las 10 ventas realizadas por los 10 trabajadores durante la jornada laboral:");
+        // INGRESAR LOS DATOS DE CADA VENTA
+        ventas = capturarDatos(ventas, numero);
+        vendedores = asignarVendedor(vendedores, numero);
 
-        // Utilizar ciclo 'for' para el ingreso de datos
-        for(int i=0; i<ventas.length; i++){
-            IO.print("Ingresa el total de ventas del trabajador " + (i+1) + ": ");
-            int cantidad = sc.nextInt();
-            sc.nextLine();
+        // IMPRIMIR DATOS INGRESADOS
+        IO.println("\nDATOS INGRESADOS");
+        imprimirDatos(ventas, vendedores, numero);
 
-            // Utilizar el Método 5 'Comprobar Datos' y asignarle ese valor al índice 'i' del Array 'ventas'
-            ventas[i] = comprobarDatos(cantidad, i);
+        // ORDENAMIENTO BURBUJA
+        ventas = ordenamientoBurbuja(ventas, vendedores, numero);
+
+        // IMPRIMIR DATOS ORDENADOS
+        IO.println("\nDATOS ORDENADOS");
+        imprimirDatos(ventas, vendedores, numero);
+
+        // DATOS DE LAS VENTAS: PROMEDIO, VENTA ALTA, VENTA BAJA
+        ventaBajaAlta(ventas, numero);
+    }
+
+    /* ======================================
+    - - - - MÉTODOS DEL PROGRAMA - - - -
+    ====================================== */
+
+    // MÉTODO 1. Permite al usuario ingresar los datos de cada venta
+    public static int[] capturarDatos(int[] ventas, int numero){
+        ventas = new int[numero];
+        int num;
+
+        IO.println("\n - - - INGRESO DE DATOS - - -");
+        
+        for(int i=0; i<numero; i++){
+            IO.print("Ingresa la venta " + (i+1) + " del vendedor " + (i+1) + ": ");
+            num = sc.nextInt(); sc.nextLine();
+
+            // VERIFICAR QUE LAS VENTAS SEAN MAYORES O IGUALES A CERO (ENTEROS POSITIVOS)
+            ventas[i] = verificarDatos(num, i);
         }
-
         return ventas;
     }
 
-    // Método 2. Mostrar arreglo >> permite al usuario visualizar los valores de venta que ingresó en el 'Método 1'
-    public static void mostrarArreglo(int[] ventas){
-        for(int i=0; i<ventas.length; i++){
-            IO.println("Ventas del trabajador " + (i+1) + " = " + ventas[i]);
+    // MÉTODO 2. Se le asigna un valor a cada vendedor (tiene el mismo tamaño que 'ventas')
+    public static int[] asignarVendedor(int[] vendedores, int numero){
+        for(int i=0; i<numero; i++){
+            vendedores[i] = i+1;
         }
+        return vendedores;
     }
 
-    // Método 3. Ordenar Burbuja >> permite al usuario reordenar los valores de menor a mayor
-    public static void ordenarBurbuja(int[] ventas, int cantidad){
+    // MÉTODO 3. Permite verificar que los datos de ventas sean números enteros positivos (incluyendo el cero)
+    public static int verificarDatos(int num, int i){
+        while(num < 0){
+            System.err.println("\nERROR DE INGRESO...\nLAS VENTAS DEBEN SER MAYORES O IGUALES A CERO...\nPOR FAVOR INGRESA UNA NUEVA CANTIDAD...");
+            IO.print("\nIngresa la venta " + (i+1) + " del vendedor " + (i+1) + ": ");
+            num = sc.nextInt(); sc.nextLine();
+        }
+        return num;
+    }
+
+    // MÉTODO 4. Permite ordenar de menor a mayor los datos de las 'ventas'. De igual forma, ordena los trabajadores con su respectiva venta
+    public static int[] ordenamientoBurbuja(int[] ventas, int[] vendedores, int numero){
         int temp;
 
-        IO.println("\n<< ORDENAMIENTO BURBUJA >>");
-        for(int i=0; i<cantidad; i++){
-            for(int j=0; j<cantidad; j++){
-                if(ventas[i] > ventas[j]){
-                    temp = ventas[j];
-                    ventas[j] = ventas[i];
-                    ventas[i] = temp;
+        for(int i=0; i<numero; i++){
+            for(int j=0; j<numero; j++){
+                if(ventas[j] < ventas[i]){
+                    temp = ventas[i];
+                    ventas[i] = ventas[j];
+                    ventas[j] = temp;
+
+                    temp = vendedores[i];
+                    vendedores[i] = vendedores[j];
+                    vendedores[j] = temp;
                 }
             }
         }
+        return ventas;
     }
 
-    // Método 4. Calcular Promedio >> muestra al usuario el promedio de las ventas realizadas
-    public static void promedio(int[] ventas){
-        double suma = 0;
-        double promedio = 0;
+    //  MÉTODO 5. Imprime el trabajador con la cantidad de ventas realizadas
+    public static void imprimirDatos(int[] ventas, int[] vendedores, int numero){
+        for(int i=0; i<numero; i++){
+            IO.println("Venta del trabajador " + vendedores[i] + ": " + ventas[i]);
+        }
+    }   
 
-        IO.println("\n<< PROMEDIO DE VENTAS >>");
-        for(int i=0; i<ventas.length; i++){
+    //  MÉTODO 6. Imprime el promedio de ventas, la venta más alta y la venta más baja
+    public static void ventaBajaAlta(int[] ventas, int numero){
+        int suma=0;
+
+        for(int i=0; i<numero; i++){
             suma += ventas[i];
         }
-
-        // Calcular y mostrar el resultado
-        promedio = (suma/ventas.length);
-        IO.println("El promedio de ventas de los 10 trabajadores fue de " + promedio);
+        double promedio = suma / numero;
+        
+        IO.println("\nDATOS DE LAS VENTAS");
+        IO.println("Promedio de ventas: " + promedio);
+        IO.println("Venta más alta: " + ventas[0]);
+        IO.println("Venta más baja: " + ventas[numero-1]);
     }
 
-    // Método 5. Comprobar Datos >> permite verificar que las ventas realizadas sean únicamente cantidades enteras (int)
-    public static int comprobarDatos(int cantidad, int i){
-        while(cantidad < 0){
-            System.err.println("\nERROR... LAS VENTAS DEBEN SER MAYORES O IGUALES A CERO... POR FAVOR INGRESA OTRA CANTIDAD...");
-            IO.print("Ingresa el total de ventas del trabajador " + (i+1) + ": ");
-            cantidad = Integer.parseInt(sc.nextLine().trim());
-        }
-        return cantidad;
-    }
 }
