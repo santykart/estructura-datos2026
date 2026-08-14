@@ -93,7 +93,7 @@ public class BubbleSort {
 
         for(int i=0; i<numero; i++){
             for(int j=0; j<numero; j++){
-                if(ventas[j] < ventas[i]){
+                if(ventas[j] > ventas[i]){
                     temp = ventas[i];
                     ventas[i] = ventas[j];
                     ventas[j] = temp;
@@ -116,7 +116,7 @@ public class BubbleSort {
 
     //  MÉTODO 6. Imprime el promedio de ventas, la venta más alta y la venta más baja
     public static void ventaBajaAlta(int[] ventas, int numero){
-        int suma=0;
+        double suma=0.0;
 
         for(int i=0; i<numero; i++){
             suma += ventas[i];
