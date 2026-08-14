@@ -15,8 +15,17 @@ public class BubbleSort {
         int numero;
 
         // SOLICITAR INGRESO DE DATOS AL USUARIO
+        IO.println("<< SISTEMA DE VENTAS >>");
         IO.print("\nIngresa el número de ventas que deseas registrar: ");
         numero = sc.nextInt(); sc.nextLine();
+
+        // VERIFICAR QUE EL NÚMERO DE VENTAS SEA ENTERO POSITIVO Y DISTINTO DE CERO
+        while(numero <= 0){
+            System.err.println("\nERROR... EL NÚMERO DE VENTAS DEBE SER ENTERO POSITIVO Y DISTINTO DE CERO... POR FAVOR INGRESA UNA NUEVA CANTIDAD...");
+            IO.print("Ingresa el número de ventas que deseas registrar: ");
+            numero = sc.nextInt(); sc.nextLine();
+        }
+
         ventas = new int[numero];
         vendedores = new int[numero];
 
