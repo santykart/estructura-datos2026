@@ -125,8 +125,8 @@ public class BubbleSort {
         
         IO.println("\nDATOS DE LAS VENTAS");
         IO.println("Promedio de ventas: " + promedio);
-        IO.println("Venta más alta: " + ventas[0]);
-        IO.println("Venta más baja: " + ventas[numero-1]);
+        IO.println("Venta más alta: " + ventas[numero-1]);
+        IO.println("Venta más baja: " + ventas[0]);
     }
 
 }
